@@ -112,8 +112,6 @@ left_column, right_column = st.columns(2)
 left_column.plotly_chart(fig_hourly_sales, use_container_width=True)
 right_column.plotly_chart(fig_product_sales, use_container_width=True)
 
-st.markdown("""---""")
-
 # SALES BY PAYMENT [BAR CHART]
 sales_by_payment = df_selection.groupby(by=["Payment"])[["Total"]].sum().sort_values(by="Total")
 fig_payment_sales = px.bar(
