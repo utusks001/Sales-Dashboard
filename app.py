@@ -23,28 +23,61 @@ def get_data_from_excel():
 
 df = get_data_from_excel()
 
+# # ---- SIDEBAR ----
+# st.sidebar.header("Please Filter Here:")
+# city = st.sidebar.multiselect(
+#     "Select the City:",
+#     options=df["City"].unique(),
+#     default=df["City"].unique()
+# )
+
+# customer_type = st.sidebar.multiselect(
+#     "Select the Customer Type:",
+#     options=df["Customer_type"].unique(),
+#     default=df["Customer_type"].unique(),
+# )
+
+# gender = st.sidebar.multiselect(
+#     "Select the Gender:",
+#     options=df["Gender"].unique(),
+#     default=df["Gender"].unique()
+# )
+
+# df_selection = df.query(
+#     "City == @city & Customer_type ==@customer_type & Gender == @gender"
+# )
+
+# # Check if the dataframe is empty:
+# if df_selection.empty:
+#     st.warning("No data available based on the current filter settings!")
+#     st.stop() # This will halt the app from further execution.
+
 # ---- SIDEBAR ----
 st.sidebar.header("Please Filter Here:")
-city = st.sidebar.multiselect(
-    "Select the City:",
-    options=df["City"].unique(),
-    default=df["City"].unique()
-)
 
-customer_type = st.sidebar.multiselect(
-    "Select the Customer Type:",
-    options=df["Customer_type"].unique(),
-    default=df["Customer_type"].unique(),
-)
+all_cities = df["City"].unique()
+city_selection = st.sidebar.checkbox("Select All Cities", value=True)
+if city_selection:
+    selected_cities = all_cities
+else:
+    selected_cities = st.sidebar.multiselect("Select the City:", options=all_cities, default=all_cities)
 
-gender = st.sidebar.multiselect(
-    "Select the Gender:",
-    options=df["Gender"].unique(),
-    default=df["Gender"].unique()
-)
+all_customer_types = df["Customer_type"].unique()
+customer_type_selection = st.sidebar.checkbox("Select All Customer Types", value=True)
+if customer_type_selection:
+    selected_customer_types = all_customer_types
+else:
+    selected_customer_types = st.sidebar.multiselect("Select the Customer Type:", options=all_customer_types, default=all_customer_types)
+
+all_genders = df["Gender"].unique()
+gender_selection = st.sidebar.checkbox("Select All Genders", value=True)
+if gender_selection:
+    selected_genders = all_genders
+else:
+    selected_genders = st.sidebar.multiselect("Select the Gender:", options=all_genders, default=all_genders)
 
 df_selection = df.query(
-    "City == @city & Customer_type ==@customer_type & Gender == @gender"
+    "City in @selected_cities & Customer_type in @selected_customer_types & Gender in @selected_genders"
 )
 
 # Check if the dataframe is empty:
