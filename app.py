@@ -72,7 +72,7 @@ with middle_column:
     st.subheader(f"US$ {average_sale_by_transaction}")
 with right_column:
     st.subheader("Average Rating:")
-    st.subheader(f"{average_rating} {star_rating}")
+    st.subheader(f"{int(average_rating)}/10 {star_rating}")
 
 st.markdown("""---""")
 
