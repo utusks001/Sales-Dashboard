@@ -1,8 +1,5 @@
 import pandas as pd  # pip install pandas openpyxl --user
 import numpy as np  # pip install numpy 
-import matplotlib.pyplot as plt # pip install matplotlib --user
-from matplotlib.gridspec import GridSpec # pip install matplotlib --user
-import seaborn as sns # pip install seaborn --user
 import plotly.express as px # pip install plotly-express --user
 import plotly.graph_objects as go
 import streamlit as st  # pip install streamlit --user
