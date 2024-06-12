@@ -140,16 +140,16 @@ fig_City_sales = px.pie(
     template="plotly_white",
     color_discrete_sequence=px.colors.qualitative.Set3,
 )
-fig_branch_sales.update_traces(textposition="inside", textinfo="percent+label")
+fig_City_sales.update_traces(textposition="inside", textinfo="percent+label")
 
 # Tambahkan layout atau konfigurasi tambahan jika diperlukan
-fig_branch_sales.update_layout(
+fig_City_sales.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",
 )
 
 left_column, right_column = st.columns(2)
 left_column.plotly_chart(fig_payment_sales, use_container_width=True)
-right_column.plotly_chart(fig_branch_sales, use_container_width=True)
+right_column.plotly_chart(fig_City_sales, use_container_width=True)
 
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
