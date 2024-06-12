@@ -76,20 +76,36 @@ with right_column:
 
 st.markdown("""---""")
 
+# # SALES BY PRODUCT LINE [BAR CHART]
+# sales_by_product_line = df_selection.groupby(by=["Product line"])[["Total"]].sum().sort_values(by="Total")
+# fig_product_sales = px.bar(
+#     sales_by_product_line,
+#     x="Total",
+#     y=sales_by_product_line.index,
+#     orientation="h",
+#     title="<b>Sales by Product Line</b>",
+#     color_discrete_sequence=["#005F85"] * len(sales_by_product_line),
+#     template="plotly_white",
+# )
+# fig_product_sales.update_layout(
+#     plot_bgcolor="rgba(0,0,0,0)",
+#     xaxis=(dict(showgrid=False))
+# )
+
 # SALES BY PRODUCT LINE [BAR CHART]
-sales_by_product_line = df_selection.groupby(by=["Product line"])[["Total"]].sum().sort_values(by="Total")
+sales_by_product_city = df_selection.groupby(by=["Product line", "City"])[["Total"]].sum().reset_index()
 fig_product_sales = px.bar(
-    sales_by_product_line,
+    sales_by_product_city,
     x="Total",
-    y=sales_by_product_line.index,
+    y="Product line",
     orientation="h",
     title="<b>Sales by Product Line</b>",
-    color_discrete_sequence=["#005F85"] * len(sales_by_product_line),
+    color="City",
     template="plotly_white",
 )
 fig_product_sales.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",
-    xaxis=(dict(showgrid=False))
+    xaxis=dict(showgrid=False)
 )
 
 # # SALES BY HOUR [LINE CHART]
@@ -153,7 +169,6 @@ fig_City_sales = px.pie(
     names=sales_by_City.index,
     title="<b>Sales by City</b>",
     template="plotly_white",
-    color_discrete_sequence=px.colors.qualitative.Set3,
 )
 fig_City_sales.update_traces(textposition="inside", textinfo="percent+label")
 
