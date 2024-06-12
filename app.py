@@ -92,20 +92,36 @@ fig_product_sales.update_layout(
     xaxis=(dict(showgrid=False))
 )
 
+# # SALES BY HOUR [LINE CHART]
+# sales_by_hour = df_selection.groupby(by=["hour"])[["Total"]].sum()
+# fig_hourly_sales = px.line(
+#     sales_by_hour,
+#     x=sales_by_hour.index,
+#     y="Total",
+#     title="<b>Sales by Hour</b>",
+#     color_discrete_sequence=["#0027B8"] * len(sales_by_hour),
+#     template="plotly_white",
+# )
+# fig_hourly_sales.update_layout(
+#     xaxis=dict(tickmode="linear"),
+#     plot_bgcolor="rgba(0,0,0,0)",
+#     yaxis=(dict(showgrid=False)),
+# )
+
 # SALES BY HOUR [LINE CHART]
-sales_by_hour = df_selection.groupby(by=["hour"])[["Total"]].sum()
+sales_by_hour_city = df_selection.groupby(by=["hour", "City"])[["Total"]].sum().reset_index()
 fig_hourly_sales = px.line(
-    sales_by_hour,
-    x=sales_by_hour.index,
+    sales_by_hour_city,
+    x="hour",
     y="Total",
     title="<b>Sales by Hour</b>",
-    color_discrete_sequence=["#0027B8"] * len(sales_by_hour),
+    color="City",
     template="plotly_white",
 )
 fig_hourly_sales.update_layout(
     xaxis=dict(tickmode="linear"),
     plot_bgcolor="rgba(0,0,0,0)",
-    yaxis=(dict(showgrid=False)),
+    yaxis=dict(showgrid=False),
 )
 
 left_column, right_column = st.columns(2)
