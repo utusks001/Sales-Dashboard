@@ -130,13 +130,13 @@ fig_payment_sales.update_layout(
     yaxis=(dict(showgrid=False)),
 )
 
-# SALES BY BRANCH [PIE CHART]
-sales_by_branch = df_selection.groupby(by=["Branch"])[["Total"]].sum()
-fig_branch_sales = px.pie(
-    sales_by_branch,
+# SALES BY CITY [PIE CHART]
+sales_by_City = df_selection.groupby(by=["City"])[["Total"]].sum()
+fig_City_sales = px.pie(
+    sales_by_City,
     values="Total",
-    names=sales_by_branch.index,
-    title="<b>Sales by Branch</b>",
+    names=sales_by_City.index,
+    title="<b>Sales by City</b>",
     template="plotly_white",
     color_discrete_sequence=px.colors.qualitative.Set3,
 )
