@@ -113,19 +113,20 @@ left_column.plotly_chart(fig_hourly_sales, use_container_width=True)
 right_column.plotly_chart(fig_product_sales, use_container_width=True)
 
 # SALES BY PAYMENT [BAR CHART]
-sales_by_payment = df_selection.groupby(by=["Payment"])[["Total"]].sum().sort_values(by="Total")
+sales_by_payment = df_selection.groupby(by=["Payment","City"])[["Total"]].sum().reset_index()
 fig_payment_sales = px.bar(
     sales_by_payment,
+    x="Payment",
     y="Total",
-    x=sales_by_payment.index,
+    color="City",
     title="<b>Sales by Payment</b>",
-    color_discrete_sequence=["#0083B8"] * len(sales_by_payment),
+    barmode="group",
     template="plotly_white",
 )
 fig_payment_sales.update_layout(
     xaxis=dict(tickmode="linear"),
     plot_bgcolor="rgba(0,0,0,0)",
-    yaxis=(dict(showgrid=False)),
+    yaxis=dict(showgrid=False),
 )
 
 # SALES BY CITY [PIE CHART]
