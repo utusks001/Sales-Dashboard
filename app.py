@@ -126,7 +126,8 @@ st.markdown("""---""")
 # )
 
 # SALES BY PRODUCT LINE [BAR CHART]
-sales_by_product_city = df_selection.groupby(by=["Product line", "City"])[["Total"]].sum().reset_index()
+# sales_by_product_city = df_selection.groupby(by=["Product line", "City"])[["Total"]].sum().reset_index()
+sales_by_product_line = df_selection.groupby(by=["Product line", "City"])[["Total"]].sum().sort_values(by="Total")
 fig_product_sales = px.bar(
     sales_by_product_city,
     x="Total",
@@ -153,11 +154,8 @@ fig_product_sales.update_layout(
     xaxis=dict(showgrid=False)
 )
 
-# # Menampilkan chart di Streamlit
-# st.plotly_chart(fig_product_sales)
-
 # # SALES BY HOUR [LINE CHART]
-# sales_by_hour = df_selection.groupby(by=["hour"])[["Total"]].sum()
+# sales_by_hour = df_selection.groupby(by=["hour"])[["Total"]].sum().reset_index()
 # fig_hourly_sales = px.line(
 #     sales_by_hour,
 #     x=sales_by_hour.index,
@@ -182,10 +180,21 @@ fig_hourly_sales = px.line(
     color="City",
     template="plotly_white",
 )
+# Mengubah font dan ukuran judul
 fig_hourly_sales.update_layout(
-    xaxis=dict(tickmode="linear"),
+    title={
+        'text': "<b>Sales by Hour</b>",
+        'y': 0.9,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+        'font': {
+            'size': 24,  # Ukuran font
+            'family': 'Arial, sans-serif',  # Font yang digunakan
+        }
+    },
     plot_bgcolor="rgba(0,0,0,0)",
-    yaxis=dict(showgrid=False),
+    xaxis=dict(showgrid=False)
 )
 
 left_column, right_column = st.columns(2)
@@ -203,10 +212,26 @@ fig_payment_sales = px.bar(
     barmode="group",
     template="plotly_white",
 )
+# fig_payment_sales.update_layout(
+#     xaxis=dict(tickmode="linear"),
+#     plot_bgcolor="rgba(0,0,0,0)",
+#     yaxis=dict(showgrid=False),
+# )
+# Mengubah font dan ukuran judul
 fig_payment_sales.update_layout(
-    xaxis=dict(tickmode="linear"),
+    title={
+        'text': "<b>Sales by Payment</b>",
+        'y': 0.9,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+        'font': {
+            'size': 24,  # Ukuran font
+            'family': 'Arial, sans-serif',  # Font yang digunakan
+        }
+    },
     plot_bgcolor="rgba(0,0,0,0)",
-    yaxis=dict(showgrid=False),
+    xaxis=dict(showgrid=False)
 )
 
 # SALES BY CITY [PIE CHART]
@@ -221,7 +246,17 @@ fig_City_sales = px.pie(
 fig_City_sales.update_traces(textposition="inside", textinfo="percent+label")
 
 # Tambahkan layout atau konfigurasi tambahan jika diperlukan
+# fig_City_sales.update_layout(
+#     plot_bgcolor="rgba(0,0,0,0)",
+# )
 fig_City_sales.update_layout(
+    title={
+        'text': "<b>Sales by City</b>",
+        'font': {
+            'size': 24,  # Ukuran font
+            'family': 'Arial, sans-serif',  # Font yang digunakan
+        }
+    },
     plot_bgcolor="rgba(0,0,0,0)",
 )
 
