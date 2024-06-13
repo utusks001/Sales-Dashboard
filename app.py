@@ -136,10 +136,25 @@ fig_product_sales = px.bar(
     color="City",
     template="plotly_white",
 )
+# Mengubah font dan ukuran judul
 fig_product_sales.update_layout(
+    title={
+        'text': "<b>Sales by Product Line</b>",
+        'y': 0.9,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
+        'font': {
+            'size': 24,  # Ukuran font
+            'family': 'Arial, sans-serif',  # Font yang digunakan
+        }
+    },
     plot_bgcolor="rgba(0,0,0,0)",
     xaxis=dict(showgrid=False)
 )
+
+# Menampilkan chart di Streamlit
+st.plotly_chart(fig_product_sales)
 
 # # SALES BY HOUR [LINE CHART]
 # sales_by_hour = df_selection.groupby(by=["hour"])[["Total"]].sum()
