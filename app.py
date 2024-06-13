@@ -92,8 +92,8 @@ st.markdown("##")
 # TOP KPI's
 total_sales = int(df_selection["Total"].sum())
 total_sales = total_sales * 16500
-average_sale_by_transaction = round(df_selection["Total"].mean())
-average_sale_by_transaction = int(average_sale_by_transaction) * 16500
+average_sale_by_transaction = int(round(df_selection["Total"].mean()))
+average_sale_by_transaction = average_sale_by_transaction * 16500
 average_rating = round(df_selection["Rating"].mean(), 1)
 star_rating = ":star:" * int(round(average_rating, 0))
 
