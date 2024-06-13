@@ -242,15 +242,14 @@ fig_City_sales = px.pie(
     title="<b>Sales by City</b>",
     template="plotly_white",
 )
-fig_City_sales.update_traces(textposition="inside", textinfo="percent+label")
-
-# Tambahkan layout atau konfigurasi tambahan jika diperlukan
-# fig_City_sales.update_layout(
-#     plot_bgcolor="rgba(0,0,0,0)",
-# )
+# Mengubah font dan ukuran judul
 fig_City_sales.update_layout(
     title={
         'text': "<b>Sales by City</b>",
+        'y': 0.9,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top',
         'font': {
             'size': 24,  # Ukuran font
             'family': 'Arial, sans-serif',  # Font yang digunakan
@@ -258,6 +257,9 @@ fig_City_sales.update_layout(
     },
     plot_bgcolor="rgba(0,0,0,0)",
 )
+
+# Mengatur posisi teks pada pie chart
+fig_City_sales.update_traces(textposition="inside", textinfo="percent+label")
 
 left_column, right_column = st.columns(2)
 left_column.plotly_chart(fig_payment_sales, use_container_width=True)
