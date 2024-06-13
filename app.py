@@ -91,7 +91,9 @@ st.markdown("##")
 
 # TOP KPI's
 total_sales = int(df_selection["Total"].sum())
+total_sales = total_sales * 16500
 average_sale_by_transaction = round(df_selection["Total"].mean())
+average_sale_by_transaction = average_sale_by_transaction * 16500
 average_rating = round(df_selection["Rating"].mean(), 1)
 star_rating = ":star:" * int(round(average_rating, 0))
 
@@ -99,10 +101,10 @@ star_rating = ":star:" * int(round(average_rating, 0))
 left_column, middle_column, right_column = st.columns(3)
 with left_column:
     st.subheader("Total Sales:")
-    st.subheader(f"Rp. {total_sales:,} Juta")
+    st.subheader(f"Rp. {total_sales:,}")
 with middle_column:
     st.subheader("Average Sales Per Transaction:")
-    st.subheader(f"Rp. {average_sale_by_transaction} Juta")
+    st.subheader(f"Rp. {average_sale_by_transaction}")
 with right_column:
     st.subheader("Average Rating:")
     st.subheader(f"{int(average_rating)}/10 {star_rating}")
