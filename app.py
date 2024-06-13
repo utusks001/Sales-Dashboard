@@ -153,8 +153,8 @@ fig_product_sales.update_layout(
     xaxis=dict(showgrid=False)
 )
 
-# Menampilkan chart di Streamlit
-st.plotly_chart(fig_product_sales)
+# # Menampilkan chart di Streamlit
+# st.plotly_chart(fig_product_sales)
 
 # # SALES BY HOUR [LINE CHART]
 # sales_by_hour = df_selection.groupby(by=["hour"])[["Total"]].sum()
