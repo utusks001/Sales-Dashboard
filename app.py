@@ -104,7 +104,7 @@ with left_column:
     st.subheader(f"Rp. {total_sales:,}")
 with middle_column:
     st.subheader("Average Sales Per Transaction:")
-    st.subheader(f"Rp. {average_sale_by_transaction}")
+    st.subheader(f"Rp. {average_sale_by_transaction:,}")
 with right_column:
     st.subheader("Average Rating:")
     st.subheader(f"{int(average_rating)}/10 {star_rating}")
