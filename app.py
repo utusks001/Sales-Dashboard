@@ -126,8 +126,7 @@ st.markdown("""---""")
 # )
 
 # SALES BY PRODUCT LINE [BAR CHART]
-# sales_by_product_city = df_selection.groupby(by=["Product line", "City"])[["Total"]].sum().reset_index()
-sales_by_product_line = df_selection.groupby(by=["Product line", "City"])[["Total"]].sum().sort_values(by="Total")
+sales_by_product_city = df_selection.groupby(by=["Product line", "City"])[["Total"]].sum().reset_index()
 fig_product_sales = px.bar(
     sales_by_product_city,
     x="Total",
