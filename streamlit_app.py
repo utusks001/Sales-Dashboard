@@ -19,7 +19,7 @@ def get_data_from_excel():
         sheet_name="Sales",
         skiprows=3,
         usecols="B:R",
-        nrows=1000,
+        nrows=700,
     )
     # Add 'hour' column to dataframe
     df["hour"] = pd.to_datetime(df["Time"], format="%H:%M:%S").dt.hour
