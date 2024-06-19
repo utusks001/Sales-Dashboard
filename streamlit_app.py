@@ -220,6 +220,28 @@ left_column, right_column = st.columns(2)
 left_column.plotly_chart(fig_payment_sales, use_container_width=True)
 right_column.plotly_chart(fig_City_sales, use_container_width=True)
 
+st.markdown("""---""")
+
+# Membersihkan data: menghapus tanda kurung dan mengganti '-' dengan NaN
+data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']] = (
+    data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']]
+    .replace('-', np.nan)
+    .replace(r'\((.*?)\)', r'-\1', regex=True)
+    .replace(',', '', regex=True)
+    .astype(float)
+)
+
+# Menghitung korelasi
+correlation = data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']].corr()
+
+# Membuat heatmap dari korelasi
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation, annot=True, cmap='coolwarm', center=0)
+plt.title('Correlation Heatmap')
+
+# Menampilkan plot di Streamlit
+st.pyplot(plt)
+
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
             <style>
