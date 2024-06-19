@@ -293,7 +293,6 @@ ax2.grid(linewidth=0.5, linestyle='--', color='gray')
 plt.subplots_adjust(wspace=0.4)
 st.pyplot(fig)
 
-
 # Create a new dataframe with total monthly profit for each product
 data['Date'] = pd.to_datetime(data['Date'])
 monthly_product_profit = data.groupby([data['Date'].dt.year, data['Date'].dt.month, 'Product']).agg({'Profit': 'sum'})
@@ -330,9 +329,12 @@ ax1.spines['left'].set_color('white')
 ax1.spines['top'].set_color('white')
 ax1.spines['right'].set_color('white')
 
-# Plot a heatmap of the pivot table
-sns.heatmap(product_discount_profit, annot=True, fmt='.0f', cmap='viridis', ax=ax2)
+# Plot a heatmap of the pivot table (contoh plot kedua)
+sns.heatmap(product_discount_profit, annot=True, fmt='.0f', cmap='viridis', ax=ax2, cbar_kws={'label': 'Profit'},
+            annot_kws={'color': 'black', 'fontsize': 10})  # Menyesuaikan warna teks dan ukuran font
 ax2.set_title('Profit across Products and Discount Bands', fontsize=14, color='white')
+ax2.set_xlabel('Discount Band', fontsize=12, color='white')
+ax2.set_ylabel('Product', fontsize=12, color='white')
 
 # Mengubah warna label pada heatmap
 for text in ax2.get_xticklabels():
