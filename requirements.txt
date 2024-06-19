@@ -1,4 +1,6 @@
 openpyxl
-pandas==2.0.1
-plotly==5.13.1
-streamlit==1.25.0
+pandas
+plotly
+matplotlib
+seaborn
+streamlit
