@@ -289,6 +289,11 @@ ax2.spines['right'].set_color('white')
 # Menambahkan grid pada heatmap
 ax2.grid(linewidth=0.5, linestyle='--', color='gray')
 
+# Menambahkan gradient color bar
+cbar = ax2.collections[0].colorbar
+cbar.ax.tick_params(labelcolor='white')
+cbar.set_label(label='Profit', color='white')  # Mengubah warna label degradasi warna
+
 # Menambahkan warna latar belakang pada figure
 plt.subplots_adjust(wspace=0.4)
 st.pyplot(fig)
@@ -354,6 +359,11 @@ ax2.spines['right'].set_color('white')
 
 # Menambahkan grid pada heatmap
 ax2.grid(linewidth=0.5, linestyle='--', color='gray')
+
+# Menambahkan gradient color bar
+cbar = ax2.collections[0].colorbar
+cbar.ax.tick_params(labelcolor='white')
+cbar.set_label(label='Profit', color='white')  # Mengubah warna label degradasi warna
 
 # Mengubah background color pada figure
 fig.patch.set_facecolor('#00172B')
