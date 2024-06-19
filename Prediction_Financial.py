@@ -60,7 +60,7 @@ profit_predicted_mean = profit_predictions.predicted_mean
 profit_predicted_conf_int = profit_predictions.conf_int()
 
 # Menampilkan hasil prediksi penjualan
-fig, ax = plt.subplots(2, 1, figsize=(12, 12)
+fig, ax = plt.subplots(2, 1, figsize=(12, 12))
 
 # Plot untuk prediksi penjualan
 ax[0].plot(monthly_sales.index, monthly_sales, label='Actual Sales', color='gray')
