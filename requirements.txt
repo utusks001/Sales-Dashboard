@@ -1,5 +1,6 @@
 openpyxl
 pandas
+numpy
 plotly
 matplotlib
 seaborn
