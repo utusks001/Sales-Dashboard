@@ -238,7 +238,7 @@ data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']] = (
 correlation = data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']].corr()
 
 # Membuat heatmap dari korelasi
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(6, 4))
 sns.heatmap(correlation, annot=True, cmap='coolwarm', center=0)
 plt.title('Correlation Heatmap')
 
