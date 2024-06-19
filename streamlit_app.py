@@ -51,6 +51,16 @@ if product_selection:
 else:
     selected_products = st.sidebar.multiselect("Select the Product:", options=all_products, default=all_products)
 
+# Pembersihan data untuk nilai non-numerik di kolom Profit
+df_selection = data.copy()  # Buat salinan dataframe untuk diubah
+
+# Ganti nilai non-numerik ("-") dengan NaN
+df_selection["Profit"] = pd.to_numeric(df_selection["Profit"], errors="coerce")
+
+# Hapus baris dengan NaN di kolom Profit
+df_selection = df_selection.dropna(subset=["Profit"])
+
+
 # Add 'Bulan' column to dataframe
 df_selection["Bulan"] = pd.to_datetime(df_selection["Date"], format='%Y-%m')
 
