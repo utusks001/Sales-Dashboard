@@ -5,4 +5,5 @@ Sales Dashboard built-in Python and the Streamlit library to visualize Excel dat
 
 ## Demo
 Sales Dashboard: https://sales-dashboard-tr01.streamlit.app/
-Financial Dashboard: 
+
+Financial Dashboard: https://financial-dashboard-present.streamlit.app/
