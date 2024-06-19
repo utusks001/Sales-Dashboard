@@ -225,6 +225,10 @@ right_column.plotly_chart(fig_City_sales, use_container_width=True)
 
 st.markdown("""---""")
 
+# Group data by Discount Band
+grouped_discount = data.groupby('Discount Band').agg({'Sales': 'sum'})
+grouped_discount = grouped_discount.sort_values(by='Sales', ascending=False)
+
 # Membersihkan data: menghapus tanda kurung dan mengganti '-' dengan NaN
 data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']] = (
     data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']]
@@ -237,13 +241,57 @@ data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']] = (
 # Menghitung korelasi
 correlation = data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']].corr()
 
-# Membuat heatmap dari korelasi
-plt.figure(figsize=(6, 4))
-sns.heatmap(correlation, annot=True, cmap='coolwarm', center=0)
-plt.title('Correlation Heatmap')
+# Membuat subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 
-# Menampilkan plot di Streamlit
-st.pyplot(plt)
+# Mengubah background color pada figure
+fig.patch.set_facecolor('#00172B')  # Ganti dengan warna latar belakang yang diinginkan
+
+# Plot Sales by Discount Band
+ax1.bar(grouped_discount.index, grouped_discount['Sales'], color='#E694FF', alpha=0.7)
+ax1.set_title('Sales by Discount Band', fontsize=14, color='white')  # Warna judul
+ax1.set_xlabel('Discount Band', fontsize=12, color='white')  # Warna label x-axis
+ax1.set_ylabel('Sales', fontsize=12, color='white')  # Warna label y-axis
+ax1.grid(axis='y', color='gray', linestyle='--', linewidth=0.5)
+ax1.set_facecolor('#00172B')  # Background color pada ax1
+
+# Mengubah warna tick labels pada x-axis dan y-axis
+ax1.tick_params(axis='x', colors='white')
+ax1.tick_params(axis='y', colors='white')
+
+# Mengubah warna sumbu x dan y
+ax1.spines['bottom'].set_color('white')
+ax1.spines['left'].set_color('white')
+ax1.spines['top'].set_color('white')
+ax1.spines['right'].set_color('white')
+
+# Plot heatmap of correlation
+sns.heatmap(correlation, annot=True, cmap='coolwarm', center=0, ax=ax2, cbar_kws={"shrink": .8}, annot_kws={"color": "black"})
+ax2.set_title('Correlation Heatmap', fontsize=14, color='white')  # Warna judul
+ax2.set_facecolor('#00172B')  # Background color pada ax2
+
+# Mengubah warna label pada heatmap
+for text in ax2.get_xticklabels():
+    text.set_color('white')
+for text in ax2.get_yticklabels():
+    text.set_color('white')
+
+# Mengubah warna tick labels pada heatmap
+ax2.tick_params(axis='x', colors='white')
+ax2.tick_params(axis='y', colors='white')
+
+# Mengubah warna sumbu x dan y pada heatmap
+ax2.spines['bottom'].set_color('white')
+ax2.spines['left'].set_color('white')
+ax2.spines['top'].set_color('white')
+ax2.spines['right'].set_color('white')
+
+# Menambahkan grid pada heatmap
+ax2.grid(linewidth=0.5, linestyle='--', color='gray')
+
+# Menambahkan warna latar belakang pada figure
+plt.subplots_adjust(wspace=0.4)
+st.pyplot(fig)
 
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
