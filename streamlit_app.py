@@ -293,6 +293,72 @@ ax2.grid(linewidth=0.5, linestyle='--', color='gray')
 plt.subplots_adjust(wspace=0.4)
 st.pyplot(fig)
 
+
+# Create a new dataframe with total monthly profit for each product
+data['Date'] = pd.to_datetime(data['Date'])
+monthly_product_profit = data.groupby([data['Date'].dt.year, data['Date'].dt.month, 'Product']).agg({'Profit': 'sum'})
+monthly_product_profit.index.names = ['Year', 'Month', 'Product']
+monthly_product_profit.reset_index(inplace=True)
+
+# Create a 'Year-Month' column for easier plotting
+monthly_product_profit['Year-Month'] = pd.to_datetime(monthly_product_profit[['Year', 'Month']].assign(day=1))
+
+# Create a pivot table of 'Profit' with 'Product' and 'Discount Band' as dimensions
+product_discount_profit = data.pivot_table(values='Profit', index='Product', columns='Discount Band', aggfunc='sum')
+
+# Membuat subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# Plot monthly profit for each product
+for product in monthly_product_profit['Product'].unique():
+    product_data = monthly_product_profit[monthly_product_profit['Product'] == product]
+    ax1.plot(product_data['Year-Month'], product_data['Profit'], label=product)
+ax1.set_title('Monthly Profit by Product', fontsize=14, color='white')
+ax1.set_xlabel('Date', fontsize=12, color='white')
+ax1.set_ylabel('Profit', fontsize=12, color='white')
+ax1.legend()
+ax1.grid()
+ax1.set_facecolor('#00172B')
+
+# Mengubah warna tick labels pada x-axis dan y-axis
+ax1.tick_params(axis='x', colors='white')
+ax1.tick_params(axis='y', colors='white')
+
+# Mengubah warna sumbu x dan y
+ax1.spines['bottom'].set_color('white')
+ax1.spines['left'].set_color('white')
+ax1.spines['top'].set_color('white')
+ax1.spines['right'].set_color('white')
+
+# Plot a heatmap of the pivot table
+sns.heatmap(product_discount_profit, annot=True, fmt='.0f', cmap='viridis', ax=ax2)
+ax2.set_title('Profit across Products and Discount Bands', fontsize=14, color='white')
+
+# Mengubah warna label pada heatmap
+for text in ax2.get_xticklabels():
+    text.set_color('white')
+for text in ax2.get_yticklabels():
+    text.set_color('white')
+
+# Mengubah warna tick labels pada heatmap
+ax2.tick_params(axis='x', colors='white')
+ax2.tick_params(axis='y', colors='white')
+
+# Mengubah warna sumbu x dan y pada heatmap
+ax2.spines['bottom'].set_color('white')
+ax2.spines['left'].set_color('white')
+ax2.spines['top'].set_color('white')
+ax2.spines['right'].set_color('white')
+
+# Menambahkan grid pada heatmap
+ax2.grid(linewidth=0.5, linestyle='--', color='gray')
+
+# Mengubah background color pada figure
+fig.patch.set_facecolor('#00172B')
+
+# Menampilkan plot di Streamlit
+st.pyplot(fig)
+
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
             <style>
