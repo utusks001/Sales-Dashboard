@@ -5,3 +5,5 @@ plotly
 matplotlib
 seaborn
 streamlit
+SARIMAX
+statsmodels
