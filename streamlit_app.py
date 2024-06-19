@@ -60,14 +60,13 @@ df_selection["Profit"] = pd.to_numeric(df_selection["Profit"], errors="coerce")
 # Hapus baris dengan NaN di kolom Profit
 df_selection = df_selection.dropna(subset=["Profit"])
 
-
-# Add 'Bulan' column to dataframe
-df_selection["Bulan"] = pd.to_datetime(df_selection["Date"], format='%Y-%m')
-
 # Seleksi dataframe berdasarkan filter yang dipilih
 df_selection = df_selection.query(
     "Country in @selected_countries & Segment in @selected_segments & Product in @selected_products"
 )
+
+# Add 'Bulan' column to dataframe
+df_selection["Bulan"] = pd.to_datetime(df_selection["Date"], format='%Y-%m')
 
 # Cek apakah dataframe kosong:
 if df_selection.empty:
