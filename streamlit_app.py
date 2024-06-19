@@ -51,29 +51,12 @@ if product_selection:
 else:
     selected_products = st.sidebar.multiselect("Select the Product:", options=all_products, default=all_products)
 
-# Filter untuk profit
-all_profits = data["Profit"].unique()
-profit_selection = st.sidebar.checkbox("Select All Profits", value=True)
-if profit_selection:
-    selected_profits = all_profits
-else:
-    selected_profits = st.sidebar.multiselect("Select the Profit:", options=all_profits, default=all_profits)
-
-# Pembersihan data untuk nilai non-numerik di kolom Profit
-df_selection = data.copy()  # Buat salinan dataframe untuk diubah
-
-# Ganti nilai non-numerik ("-") dengan NaN
-df_selection["Profit"] = pd.to_numeric(df_selection["Profit"], errors="coerce")
-
-# Hapus baris dengan NaN di kolom Profit
-df_selection = df_selection.dropna(subset=["Profit"])
-
 # Add 'Bulan' column to dataframe
 df_selection["Bulan"] = pd.to_datetime(df_selection["Date"], format='%Y-%m')
 
 # Seleksi dataframe berdasarkan filter yang dipilih
 df_selection = df_selection.query(
-    "Country in @selected_countries & Segment in @selected_segments & Product in @selected_products & Profit in @selected_profits"
+    "Country in @selected_countries & Segment in @selected_segments & Product in @selected_products"
 )
 
 # Cek apakah dataframe kosong:
