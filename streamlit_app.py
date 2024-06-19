@@ -242,7 +242,7 @@ data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']] = (
 correlation = data[['Manufacturing Price', 'Sale Price', 'Sales', 'Profit']].corr()
 
 # Membuat subplots
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 
 # Mengubah background color pada figure
 fig.patch.set_facecolor('#00172B')  # Ganti dengan warna latar belakang yang diinginkan
@@ -311,7 +311,7 @@ monthly_product_profit['Year-Month'] = pd.to_datetime(monthly_product_profit[['Y
 product_discount_profit = data.pivot_table(values='Profit', index='Product', columns='Discount Band', aggfunc='sum')
 
 # Membuat subplots
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 
 # Plot monthly profit for each product
 for product in monthly_product_profit['Product'].unique():
