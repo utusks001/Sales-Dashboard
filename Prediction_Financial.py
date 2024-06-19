@@ -116,9 +116,9 @@ future_df = pd.DataFrame({
     'Predicted Profit': future_profit_mean.values
 })
 
-# Menyimpan DataFrame ke Excel
-file_name = 'prediction_results.xlsx'  # Nama file Excel untuk disimpan
-future_df.to_excel(file_name, index=False)
+# # Menyimpan DataFrame ke Excel
+# file_name = 'prediction_results.xlsx'  # Nama file Excel untuk disimpan
+# future_df.to_excel(file_name, index=False)
 
 
 # Menampilkan prediksi penjualan dan profit masa depan
