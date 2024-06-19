@@ -18,7 +18,7 @@ def read_excel_data():
 data = read_excel_data()
 
 # def get_data_from_csv():
-#     df = pd.read_csv("financials.csv", sep=",")  # Membaca CSV dengan delimiter koma
+#     df = pd.read_csv("financials.csv", sep=";")  # Membaca CSV dengan delimiter koma
 #     return df
 
 # # Membaca data dari file CSV
@@ -51,7 +51,6 @@ if product_selection:
 else:
     selected_products = st.sidebar.multiselect("Select the Product:", options=all_products, default=all_products)
 
-
 # Filter untuk profit
 all_profits = data["Profit"].unique()
 profit_selection = st.sidebar.checkbox("Select All Profits", value=True)
@@ -69,12 +68,8 @@ df_selection["Profit"] = pd.to_numeric(df_selection["Profit"], errors="coerce")
 # Hapus baris dengan NaN di kolom Profit
 df_selection = df_selection.dropna(subset=["Profit"])
 
-
 # Add 'Bulan' column to dataframe
 df_selection["Bulan"] = pd.to_datetime(df_selection["Date"], format='%Y-%m')
-
-# Add 'Tahun' column to dataframe
-df_selection["Tahun"] = pd.to_datetime(df_selection["Date"], format='%Y')
 
 # Seleksi dataframe berdasarkan filter yang dipilih
 df_selection = df_selection.query(
@@ -89,7 +84,6 @@ if df_selection.empty:
 # ---- MAINPAGE ----
 st.title("Financial Dashboard")
 st.markdown("##")
-
 
 # TOP KPI's
 total_sales = int(df_selection["Sales"].sum() * 16500)  # Menghitung total sales 
@@ -109,7 +103,6 @@ with right_column:
     st.subheader(f"Rp. {total_profit:,} ({presentasi:.2f} %)")
 
 st.markdown("""---""")
-
 
 # SALES BY PRODUCT [BAR CHART]
 sales_by_product_city = df_selection.groupby(by=["Product", "Country"])[["Sales"]].sum().reset_index()
