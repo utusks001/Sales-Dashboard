@@ -2,9 +2,6 @@ import pandas as pd  # pip install pandas openpyxl --user
 import numpy as np  # pip install numpy 
 import plotly.express as px # pip install plotly-express --user
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt # pip install matplotlib --user
-from matplotlib.gridspec import GridSpec
-import seaborn as sns # pip install seaborn --user
 import streamlit as st  # pip install streamlit --user
 
 st.set_page_config(page_title="Financial Dashboard", layout="wide")
