@@ -7,7 +7,6 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 
 # Fungsi untuk membaca data dari file Excel
-# @st.cache
 def load_data(file_path):
     return pd.read_excel(file_path, parse_dates=['Date'])
 
