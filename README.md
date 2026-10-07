@@ -8,4 +8,3 @@ Sales Dashboard: https://sales-dashboard-tr01.streamlit.app/
 
 Financial Dashboard: https://financial-dashboard-present.streamlit.app/
 
-Financial Prediction: https://prediction-sales-profit.streamlit.app/
